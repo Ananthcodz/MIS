@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIR - Contacts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+  {%load static%}
+  <nav>
+      <div class="nav-wrapper">
+        <a href="{%url 'home'%}" class="logo1"><img src="{%static 'coca-leaves.png'%}" class="logo1"></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="{%url 'login'%}" style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Login</a></li>
+          <li><a href="{%url 'register'%}" style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Register</a></li>
+          <li><a href="{%url 'reports'%}" style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Reports</a></li>
+          <li><a href="{%url 'contacts'%}" style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Contacts</a></li>
+        </ul>
+      </div>
+    </nav>
+      
+      <div class="contacttext" style="position:relative;top:50px;left:33%;color:#00ffa3;font-size:22px;font-family:monospace;text-shadow:3px 2px 3px #00997a;">
+        CB.EN.U4CSE21601 -- Abhimanyu Valsararajan<br><br>
+        CB.EN.U4CSE21603 -- Ala Manas Royal<br><br>
+        CB.EN.U4CSE21604 -- Anantha Krishnan N R<br><br>
+        CB.EN.U4CSE21617 -- Veda Sai<br><br>
+        CB.EN.U4CSE21633 -- M Sai Mohnish
+      </div>
+      
+      <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+
+        body{
+            background-color: #353935;
+            overflow:hidden;
+        }
+
+        nav{
+            position: sticky;
+            background-color: #00ffa3;
+            
+        }
+
+        .logo1{
+            position:relative;
+            height:65px;
+            width:70px;
+            left:0.5%;
+        }
+
+        </style>
+</body>
+</html>

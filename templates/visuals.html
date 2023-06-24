@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIR - Reports</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+</head>
+{%block content%}
+
+<body>
+    {%load static%}
+
+    <nav>
+        <div class="nav-wrapper">
+            <a href="{%url 'home'%}" class="logo1"><img src="{%static 'coca-leaves.png'%}" class="logo1"></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="{%url 'login'%}"
+                        style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Login</a></li>
+                <li><a href="{%url 'register'%}"
+                        style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Register</a></li>
+                <li><a href="{%url 'reports'%}"
+                        style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Reports</a></li>
+                <li><a href="visuals.html"
+                        style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Visuals</a></li>
+                <li><a href="{%url 'contacts'%}"
+                        style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Contacts</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+<div id="flagdiv">
+    <div class = "andhraflag">
+        <button class="flagbtn" onclick="visualfun(1)">Andhra Pradesh</button>
+    </div>
+
+    <div class = "biharflag">
+        <button class="flagbtn" onclick="visualfun(2)">Bihar</button>
+    </div>
+
+    <div class = "karnatakaflag">
+        <button class="flagbtn" onclick="visualfun(3)">Karnataka</button>
+    </div>
+
+    <div class = "keralaflag">
+        <button class="flagbtn" onclick="visualfun(4)">Kerala</button>
+    </div>
+
+    <div class = "maharastraflag">
+        <button class="flagbtn" onclick="visualfun(5)">Maharastra</button>
+    </div>
+
+    <div class = "manipurflag">
+        <button class="flagbtn" onclick="visualfun(6)">Manipur</button>
+    </div>
+
+    <div class = "tnflag">
+        <button class="flagbtn" onclick="visualfun(7)">Tamil Nadu</button>
+    </div>
+
+    <div class = "wbflag">
+        <button class="flagbtn" onclick="visualfun(8)">West Bengal</button>
+    </div>
+</div>
+    <div id="andhradiv" class="container">
+        <div>
+            <p class="bar1">Physical Target / Achievement</p>
+            <p class="bary1">Area in Lakh Ha</p>
+            <p class="barx1">Financial Year</p>
+            <canvas id="andhrachart1" style="max-width:500px; height:300px"></canvas>
+        </div>
+        <div id="andhrachart1" style="position:absolute;left:800px;">
+            <p style="position:relative;left:100px;font-family: monospace;font-size:20px;font-weight:bolder">Total Coverage V/S Coverage under PMKSY</p>
+            <canvas id="andhrapiechart2" style="max-width:600px; height:300px"></canvas>
+        </div>
+        <div id="fin1">
+                <p class="bar1">Financial Target / Achievement</p>
+                <p class="bary2">Amount in Crores (Cr)</p>
+                <p class="barx1">Financial Year</p>
+                <canvas id="andhrachart2" style="max-width:500px; height:300px"></canvas>
+        </div>
+        
+    </div>
+    <div id="tamilnadudiv" class="container">
+        <div>
+            <p class="bar1">Physical Target / Achievement</p>
+            <p class="bary1">Area in Lakh Ha</p>
+            <p class="barx1">Financial Year</p>
+            <canvas id="tnchart" style="max-width:20%; height:20%"></canvas>
+            
+        </div>
+    </div>
+
+    <script>
+        var flag;
+        var xandhraphy = ['2017-18','2018-19','2019-20','2020-21','2021-22'];
+        var yandhraphy = [65,48,76.34,100.4,120.6];
+
+        var xandhrafin = ['2017-18','2018-19','2019-20','2020-21','2021-22'];
+        var yandhrafin = [10,60,70,85.9,97.5,120.6];
+
+        var xtnphy = [50,60,70,80,90,100,110,120,130,140,150];
+        var ytnphy = [7,8,8,9,9,9,10,11,14,14,15];
+        var chart1 = new Chart(document.getElementById("andhrachart1"), {
+            type: "bar",
+            data: {
+                labels: xandhraphy,
+                datasets: [{
+                backgroundColor: "rgb(52, 235, 232)",
+                borderColor: "rgba(0,0,0,0.1)",
+                data: yandhraphy
+                }]
+            },
+            options: {}
+        });
+        
+        var chart2 = new Chart(document.getElementById("andhrachart2"), {
+            type: "bar",
+            data: {
+                labels: xandhrafin,
+                datasets: [{
+                backgroundColor: "rgb(52, 235, 232)",
+                borderColor: "rgba(0,0,0,0.1)",
+                data: yandhrafin
+                }]
+            },
+            options: {}
+        });
+
+        var pieandhrax = ["2015-2017","2018-2022"];
+        var pieandhray = [120,240];
+        var barColors = [
+        "#b91d47",
+        "#00aba9",
+        ];
+
+       var chart3 = new Chart(document.getElementById("andhrapiechart2"), {
+        type: "pie",
+        data: {
+            labels: pieandhrax,
+            datasets: [{
+            backgroundColor: barColors,
+            data: pieandhray
+            }]
+        },
+        options: {
+            title: {
+            display: true,
+            
+            }
+        }
+        });
+        function visualfun(flag){
+            if(flag==1){
+                document.getElementById("andhradiv").style.display="block";
+                document.getElementById("tamilnadudiv").style.display="none";
+                document.getElementById("flagdiv").style.display="none";
+            }
+            if(flag==7){
+                document.getElementById("tanilnadudiv").style.display="block";
+                document.getElementById("flagdiv").style.display="none";
+                document.getElementById("andhradiv").style.display="none";
+            }
+        }
+    </script>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #353935;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: sticky;
+            background-color: #00ffa3;
+
+        }
+        #flagdiv{
+            display:block;
+        }
+        #andhradiv{
+            display:none;
+        }
+
+
+        #tamilnadudiv{
+            display:none;
+        }
+        #fin1{
+            position:relative;
+            top:100px;
+            
+        }
+        .bar1{
+            font-size:20px;
+            font-family: monospace;
+            font-weight: bolder;
+            position:relative;
+            top:30px;
+            left:120px;
+        }
+        .barx1{
+            font-size:20px;
+            font-family: monospace;
+            font-weight: bolder;
+            position:relative;
+            top:350px;
+            left:200px;
+        }
+        .bary1{
+            font-size:20px;
+            font-family: monospace;
+            font-weight: bolder;
+            position:absolute;
+            top:245px;
+            left:125px;
+            transform: rotate(-90deg);
+        }
+        .bary2{
+            font-size:20px;
+            font-family: monospace;
+            font-weight: bolder;
+            position:absolute;
+            left:-140px;
+            top:200px;
+            transform: rotate(-90deg);
+        }
+        .tnflag{
+            display:inline-block;
+            position:absolute;
+            width:100%;
+            top:560px;
+            left:300px;
+        }
+
+        .andhraflag{
+            display:inline-block;
+            position:absolute;
+            width:100%;
+            top:200px;
+            left:300px;
+        }
+        .biharflag{
+            display:inline-block;
+            position:absolute;
+            width:100%;
+            top:200px;
+            left:800px;
+        }
+        .karnatakaflag{
+            display:inline-block;
+            position:absolute;
+            width:100%;
+            top:320px;
+            left:300px;
+        }
+        .keralaflag{
+            display:inline-block;
+            position:absolute;
+            width:100%;
+            top:320px;
+            left:800px;
+        }
+        .maharastraflag{
+            display:inline-block;
+            position:absolute;
+            width:100%;
+            top:440px;
+            left:300px;
+        }
+        .manipurflag{
+            display:inline-block;
+            position:absolute;
+            width:100%;
+            top:440px;
+            left:800px;
+        }
+
+        .wbflag{
+            display:inline-block;
+            position:absolute;
+            width:100%;
+            top:560px;
+            left:800px;
+        }
+        .flagbtn{
+            display: inline-block;
+            border: none;
+            outline: none;
+            height: 50px;
+            width:400px;
+            background-color: #00ffa3;
+            font-family: monospace;
+            font-size: 15px;
+            transition: 0.5s;
+        }
+
+        .flagbtn:hover{
+            background-color: #8F8E8E;
+            color: white;
+            border: none;
+        }
+        .logo1 {
+            position: relative;
+            height: 65px;
+            width: 70px;
+            left: 0.5%;
+        }
+    </style>
+
+    {%endblock%}

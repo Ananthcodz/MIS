@@ -1,0 +1,1934 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIR - Reports</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+
+</head>
+{%block content%}
+
+<body>
+    {%load static%}
+
+    <nav>
+        <div class="nav-wrapper">
+            <a href="{%url 'home'%}" class="logo1"><img src="{%static 'coca-leaves.png'%}" class="logo1"></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="{%url 'login'%}"
+                        style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Login</a></li>
+                <li><a href="{%url 'register'%}"
+                        style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Register</a></li>
+                <li><a href="{%url 'reports'%}"
+                        style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Reports</a></li>
+                <li><a href="{%url 'visuals'%}"
+                        style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Visuals</a></li>
+                <li><a href="{%url 'contacts'%}"
+                        style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Contacts</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="dropdowndiv">
+        <ul id="dropdown1" class="dropdown-content">
+            <li><button class="dropdownbutton1" onclick='dropdownoption(1)'>State-wise reports</button></li>
+            <li><button class="dropdownbutton1" onclick='dropdownoption(2)'>Benefit reports</button></li>
+            <li><button class="dropdownbutton1" onclick='dropdownoption(3)'>Water reports</button></li>
+            <li><button class="dropdownbutton1" onclick='dropdownoption(4)'>Area Benefit reports</button></li>
+        </ul>
+        <a class="btn dropdown-button" data-activates="dropdown1"
+            style="font-size:16px;background-color: #00ffa3;font-family:monospace;color:black;font-weight:bolder;width:400px">Menu<i
+                class="mdi-navigation-arrow-drop-down right"
+                style="background-color: #00ffa3;color:black;font-weight:bolder"></i></a>
+    </div>
+
+    <div class="dropdowndiv2">
+        <ul id="dropdown2" class="dropdown-content">
+            <li><button class="dropdownbutton2" onclick='dropdownoptionzz(1)'>2021-2022</button></li>
+            <li><button class="dropdownbutton2" onclick='dropdownoptionzz(2)'>2020-2021</button></li>
+            <li><button class="dropdownbutton2" onclick='dropdownoptionzz(3)'>2019-2020</button></li>
+            <li><button class="dropdownbutton2" onclick='dropdownoptionzz(4)'>2018-2019</button></li>
+        </ul>
+        <a class="btn dropdown-button" data-activates="dropdown2"
+            style="font-size:16px;background-color: #00ffa3;font-family:monospace;color:black;font-weight:bolder;width:200px">Years<i
+                class="mdi-navigation-arrow-drop-down right"
+                style="background-color: #00ffa3;color:black;font-weight:bolder"></i></a>
+    </div>
+            <div class="sortz">
+                <button class="sortmaxminbtn" onclick="sortstates()">Sort</button>
+            </div>
+            <div class="max">
+            <button class="sortmaxminbtn" onclick="Maxstates()">Max</button>
+            </div>
+            <div class="min">
+                <button class="sortmaxminbtn" onclick="Minstates()">Min</button>
+            </div>
+
+    <script>
+        var option = 1;
+        var option2 = 2;
+        function dropdownoptionzz(option2){
+            if (option2 == 1) {
+                document.getElementById("statereports").style.display = "block";
+                document.getElementById("statereports2020_21").style.display = "none";
+                document.getElementById("statereports2019_20").style.display = "none";
+                document.getElementById("statereports2018_19").style.display = "none";
+                document.getElementById("statereports2017_18").style.display = "none";
+                document.getElementById("benefits").style.display = "none";
+                document.getElementById("water").style.display = "none";
+                document.getElementById("area").style.display = "none";
+                document.getElementById("sortstates").style.display = "none";
+                document.getElementById("minstate").style.display = "none";
+                document.getElementById("maxstate").style.display = "none";
+            }
+
+            if (option2 == 2) {
+                document.getElementById("statereports").style.display = "none";
+                document.getElementById("statereports2020_21").style.display = "block";
+                document.getElementById("statereports2019_20").style.display = "none";
+                document.getElementById("statereports2018_19").style.display = "none";
+                document.getElementById("statereports2017_18").style.display = "none";
+                document.getElementById("benefits").style.display = "none";
+                document.getElementById("water").style.display = "none";
+                document.getElementById("area").style.display = "none";
+                document.getElementById("sortstates").style.display = "none";
+                document.getElementById("minstate").style.display = "none";
+                document.getElementById("maxstate").style.display = "none";
+            }
+
+            if (option2 == 3) {
+                document.getElementById("statereports").style.display = "none";
+                document.getElementById("statereports2020_21").style.display = "none";
+                document.getElementById("statereports2019_20").style.display = "block";
+                document.getElementById("statereports2018_19").style.display = "none";
+                document.getElementById("statereports2017_18").style.display = "none";
+                document.getElementById("benefits").style.display = "none";
+                document.getElementById("water").style.display = "none";
+                document.getElementById("area").style.display = "none";
+                document.getElementById("sortstates").style.display = "none";
+                document.getElementById("minstate").style.display = "none";
+                document.getElementById("maxstate").style.display = "none";
+            }
+
+            if (option2 == 4) {
+                document.getElementById("statereports").style.display = "none";
+                document.getElementById("statereports2020_21").style.display = "none";
+                document.getElementById("statereports2019_20").style.display = "none";
+                document.getElementById("statereports2018_19").style.display = "block";
+                document.getElementById("statereports2017_18").style.display = "none";
+                document.getElementById("benefits").style.display = "none";
+                document.getElementById("water").style.display = "none";
+                document.getElementById("area").style.display = "none";
+                document.getElementById("sortstates").style.display = "none";
+                document.getElementById("minstate").style.display = "none";
+                document.getElementById("maxstate").style.display = "none";
+            }
+
+            if (option2 == 5) {
+                document.getElementById("statereports").style.display = "none";
+                document.getElementById("statereports2020_21").style.display = "none";
+                document.getElementById("statereports2019_20").style.display = "none";
+                document.getElementById("statereports2018_19").style.display = "none";
+                document.getElementById("statereports2017_18").style.display = "block";
+                document.getElementById("benefits").style.display = "none";
+                document.getElementById("water").style.display = "none";
+                document.getElementById("area").style.display = "none";
+                document.getElementById("sortstates").style.display = "none";
+                document.getElementById("minstate").style.display = "none";
+                document.getElementById("maxstate").style.display = "none";
+            }
+        }
+        function dropdownoption(option) {
+            if (option == 1) {
+                document.getElementById("statereports").style.display = "block";
+                document.getElementById("benefits").style.display = "none";
+                document.getElementById("water").style.display = "none";
+                document.getElementById("area").style.display = "none";
+                
+                document.getElementById("statereports2020_21").style.display = "none";
+                document.getElementById("statereports2019_20").style.display = "none";
+                document.getElementById("statereports2018_19").style.display = "none";
+                document.getElementById("statereports2017_18").style.display = "none";
+                document.getElementById("sortstates").style.display = "none";
+                document.getElementById("minstate").style.display = "none";
+                document.getElementById("maxstate").style.display = "none";
+            }
+
+            if (option == 2) {
+                document.getElementById("benefits").style.display = "block";
+                document.getElementById("water").style.display = "none";
+                document.getElementById("statereports").style.display = "none";
+                document.getElementById("area").style.display = "none";
+       
+                document.getElementById("statereports2020_21").style.display = "none";
+                document.getElementById("statereports2019_20").style.display = "none";
+                document.getElementById("statereports2018_19").style.display = "none";
+                document.getElementById("statereports2017_18").style.display = "none";
+                document.getElementById("sortstates").style.display = "none";
+                document.getElementById("minstate").style.display = "none";
+                document.getElementById("maxstate").style.display = "none";
+            }
+
+            if (option == 3) {
+                document.getElementById("water").style.display = "block";
+                document.getElementById("benefits").style.display = "none";
+                document.getElementById("statereports").style.display = "none";
+                document.getElementById("area").style.display = "none";
+
+                document.getElementById("statereports2020_21").style.display = "none";
+                document.getElementById("statereports2019_20").style.display = "none";
+                document.getElementById("statereports2018_19").style.display = "none";
+                document.getElementById("statereports2017_18").style.display = "none";
+                document.getElementById("sortstates").style.display = "none";
+                document.getElementById("minstate").style.display = "none";
+                document.getElementById("maxstate").style.display = "none";
+            }
+
+            if (option == 4) {
+                document.getElementById("area").style.display = "block";
+                document.getElementById("water").style.display = "none";
+                document.getElementById("benefits").style.display = "none";
+                document.getElementById("statereports").style.display = "none";
+  
+                document.getElementById("statereports2020_21").style.display = "none";
+                document.getElementById("statereports2019_20").style.display = "none";
+                document.getElementById("statereports2018_19").style.display = "none";
+                document.getElementById("statereports2017_18").style.display = "none";
+                document.getElementById("sortstates").style.display = "none";
+                document.getElementById("minstate").style.display = "none";
+                document.getElementById("maxstate").style.display = "none";
+            }
+
+        }
+
+        function sortstates(){
+            document.getElementById("sortstates").style.display = "block";
+            document.getElementById("minstate").style.display = "none";
+            document.getElementById("maxstate").style.display = "none";
+            document.getElementById("area").style.display = "none";
+            document.getElementById("water").style.display = "none";
+            document.getElementById("benefits").style.display = "none";
+            document.getElementById("statereports").style.display = "none";
+            document.getElementById("statereports2020_21").style.display = "none";
+            document.getElementById("statereports2019_20").style.display = "none";
+            document.getElementById("statereports2018_19").style.display = "none";
+            document.getElementById("statereports2017_18").style.display = "none";
+        }
+
+        function Minstates(){
+            document.getElementById("sortstates").style.display = "none";
+            document.getElementById("minstate").style.display = "block";
+            document.getElementById("maxstate").style.display = "none";
+            document.getElementById("area").style.display = "none";
+            document.getElementById("water").style.display = "none";
+            document.getElementById("benefits").style.display = "none";
+            document.getElementById("statereports").style.display = "none";
+            document.getElementById("statereports2020_21").style.display = "none";
+            document.getElementById("statereports2019_20").style.display = "none";
+            document.getElementById("statereports2018_19").style.display = "none";
+            document.getElementById("statereports2017_18").style.display = "none";
+        }
+
+        function Maxstates(){
+            document.getElementById("sortstates").style.display = "none";
+            document.getElementById("minstate").style.display = "none";
+            document.getElementById("maxstate").style.display = "block";
+            document.getElementById("area").style.display = "none";
+            document.getElementById("water").style.display = "none";
+            document.getElementById("benefits").style.display = "none";
+            document.getElementById("statereports").style.display = "none";
+            document.getElementById("statereports2020_21").style.display = "none";
+            document.getElementById("statereports2019_20").style.display = "none";
+            document.getElementById("statereports2018_19").style.display = "none";
+            document.getElementById("statereports2017_18").style.display = "none";
+        }
+
+
+
+
+
+    </script>
+
+
+
+
+    <div class="container" style="background-color:#00f0b2;position:relative;top:150px;" id="benefits">
+        <button class="addbtn1" onclick="adddata1()">Add</button>
+        <script>
+            var flag = 0;
+            function adddata1() {
+
+                flag = 1;
+                const collection = document.getElementsByClassName("deletebtn1");
+                for (let i = 0; i < collection.length; i++) {
+                    collection[i].style.display = "none";
+                }
+                document.getElementById("row1").style.display = "table-row";
+                document.getElementById("submitbtn").style.display = "block";
+
+            }
+
+            function deletedata1(sid) {
+                flag = 2;
+                var td = event.target.parentNode;
+                var tr = td.parentNode;
+                confirm("Are you sure?")
+                tr.parentNode.removeChild(tr);
+                document.getElementById("submitbtn").style.display = "block";
+                document.getElementById("row1").style.display = "none";
+
+            }
+        </script>
+        <h4
+            style="position:relative;text-align:center;font-family: monospace;border-bottom: 3px solid  #00997a;top:16px;">
+            Benefits</h4>
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>State ID</th>
+                    <th>State Name</th>
+                    <th>Target</th>
+                    <th>Profit amount</th>
+                </tr>
+            </thead>
+
+            <tr>
+                <td><button class="deletebtn1" onclick="deletedata1('TN')">Delete</button></td>
+                <td>TN</td>
+                <td>Tamil Nadu</td>
+                <td>21 Cr</td>
+                <td>6 Cr</td>
+            </tr>
+
+            <tr>
+                <td><button class="deletebtn1" onclick="deletedata1('KL')">Delete</button></td>
+                <td>KL</td>
+                <td>Kerala</td>
+                <td>15 Cr</td>
+                <td>3 Cr</td>
+            </tr>
+
+            <tr>
+                <td><button class="deletebtn1" onclick="deletedata1('MH')">Delete</button></td>
+                <td>MH</td>
+                <td>Maharashtra</td>
+                <td>30 Cr</td>
+                <td>8 Cr</td>
+            </tr>
+
+            <tr>
+                <td><button class="deletebtn1" onclick="deletedata1('BR')">Delete</button></td>
+                <td>BR</td>
+                <td>Bihar</td>
+                <td>8 Cr</td>
+                <td>-1.5 Cr</td>
+            </tr>
+
+
+
+            {%for i in Dict1 %}
+            <tr>
+                <td><a href="deletebenefits/{{i.state_idb}}"><button class="deletebtn1"
+                            onclick="deletedata1('{{i.state_idb}}')">Delete</button></a></td>
+                <td>{{i.state_idb}}</td>
+                <td>{{i.state_nameb}}</td>
+                <td>{{i.target}}</td>
+                <td>{{i.profit_amt}}</td>
+            </tr>
+            {%endfor%}
+
+            <form action="{%url 'reports'%}" method="POST" id="addrow1">
+                {%csrf_token%}
+                <tr id="row1">
+                    <td><input type="checkbox" id="c7">
+                    <td><input type="text" name="stateid"></td>
+                    <td><input type="text" name="statename"></td>
+                    <td><input type="text" name="Target"></td>
+                    <td><input type="text" name="Profit amount"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><input type="submit" id="submitbtn"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </form>
+        </table>
+
+    </div>
+
+    
+
+    <div class="container" style="background-color:#00f0b2;position:relative;top:150px;" id="water">
+        <button class="addbtn2" onclick="adddata2()">Add</button>
+
+        <script>
+            var flag = 0
+            function adddata2() {
+
+                flag = 3;
+                const collection = document.getElementsByClassName("deletebtn2");
+                for (let i = 0; i < collection.length; i++) {
+                    collection[i].style.display = "none";
+                }
+                document.getElementById("row2").style.display = "block";
+                document.getElementById("submitbtn2").style.display = "block";
+
+
+            }
+
+            function deletedata2() {
+                flag = 4;
+
+                var td = event.target.parentNode;
+                var tr = td.parentNode;
+                tr.parentNode.removeChild(tr);
+                document.getElementById("submitbtn2").style.display = "block";
+                document.getElementById("row2").style.display = "none";
+
+            }
+        </script>
+        <h4
+            style="position:relative;text-align:center;font-family: monospace;border-bottom: 3px solid  #00997a;top:16px;">
+            Water Distribution</h4>
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>State ID</th>
+                    <th>State Name</th>
+                    <th>Source</th>
+                    <th>Litres provided (Tmcft)</th>
+                    <th>Litres Benefited (Tmcft)</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td><button class="deletebtn2" onclick="deletedata2()">Delete</button></td>
+                    <td>TN</td>
+                    <td>Tamil Nadu</td>
+                    <td>RWH</td>
+                    <td>18.84</td>
+                    <td>8.49</td>
+                </tr>
+
+                <tr>
+                    <td><button class="deletebtn2" onclick="deletedata2()">Delete</button></td>
+                    <td>KL</td>
+                    <td>Kerala</td>
+                    <td>River</td>
+                    <td>16.66</td>
+                    <td>7.50</td>
+                </tr>
+
+                <tr>
+                    <td><button class="deletebtn2" onclick="deletedata2()">Delete</button></td>
+                    <td>MH</td>
+                    <td>Maharashtra</td>
+                    <td>Dam</td>
+                    <td>39.28</td>
+                    <td>17.73</td>
+                </tr>
+
+                <tr>
+                    <td><button class="deletebtn2" onclick="deletedata2()">Delete</button></td>
+                    <td>BR</td>
+                    <td>Bihar</td>
+                    <td>Dam</td>
+                    <td>15.27</td>
+                    <td>6.86</td>
+                </tr>
+
+
+                <tr>
+                    {%for j in Dict2%}
+                <tr>
+                    <td><a href="deletewater/{{j.state_idw}}"><button class="deletebtn2"
+                                onclick="deletedata2('{j.state_idw}')">Delete</button></a></td>
+                    <td>{{j.state_idw}}</td>
+                    <td>{{j.state_namew}}</td>
+                    <td>{{j.source}}</td>
+                    <td>{{j.litres_prov}}</td>
+                    <td>{{j.litres_benefit}}</td>
+                </tr>
+                {%endfor%}
+                </tr>
+                <form action="{%url 'water'%}" method="POST" id="addrow2">
+                    {%csrf_token%}
+                    <tr id="row2">
+                        <td><input type="checkbox" id="c7">
+                        <td><input type="text" name="State ID"></td>
+                        <td><input type="text" name="State Name"></td>
+                        <td><input type="text" name="Source"></td>
+                        <td><input type="text" name="Litres provided (Tmcft)"></td>
+                        <td><input type="text" name="Litres Benefited (Tmcft)"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><input type="submit" id="submitbtn2"></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </form>
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="container" style="background-color:#00f0b2;position:relative;top:150px;" id="area">
+        <button class="addbtn4" onclick="adddata4()">Add</button>
+
+        <script>
+
+            function adddata4() {
+
+                flag = 7;
+                const collection = document.getElementsByClassName("deletebtn4");
+                for (let i = 0; i < collection.length; i++) {
+                    collection[i].style.display = "none";
+                }
+                document.getElementById("row4").style.display = "table-row";
+                document.getElementById("submitbtn4").style.display = "block";
+            }
+
+            function deletedata4() {
+                flag = 8;
+
+                var td = event.target.parentNode;
+                var tr = td.parentNode;
+                tr.parentNode.removeChild(tr);
+                document.getElementById("submitbtn4").style.display = "block";
+                document.getElementById("row4").style.display = "none";
+
+            }
+        </script>
+        <h4
+            style="position:relative;text-align:center;font-family: monospace;border-bottom: 3px solid  #00997a;top:16px;">
+            Area benefits</h4>
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>State ID</th>
+                    <th>State Name</th>
+                    <th>Area Target (Ha)</th>
+                    <th>Area saved (Ha)</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+
+                <tr>
+                    <td><button class="deletebtn4" onclick="deletedata4()">Delete</button></td>
+                    <td>TN</td>
+                    <td>Tamil Nadu</td>
+                    <td>75140.9</td>
+                    <td>138.52</td>
+                </tr>
+
+                <tr>
+                    <td><button class="deletebtn4" onclick="deletedata4()">Delete</button></td>
+                    <td>KL</td>
+                    <td>Kerala</td>
+                    <td>527.31</td>
+                    <td>0.56</td>
+                </tr>
+
+                <tr>
+                    <td><button class="deletebtn4" onclick="deletedata4()">Delete</button></td>
+                    <td>MH</td>
+                    <td>Maharashtra</td>
+                    <td>110363</td>
+                    <td>124.45</td>
+                </tr>
+
+                <tr>
+                    <td><button class="deletebtn4" onclick="deletedata4()">Delete</button></td>
+                    <td>BR</td>
+                    <td>Bihar</td>
+                    <td>6.4</td>
+                    <td>5.9</td>
+                </tr>
+
+                <tr>
+                    {%for g in Dict3 %}
+                <tr>
+                    <td><a href="deletearea/{{g.state_ida}}"><button class="deletebtn4"
+                                onclick="deletedata4('{{g.state_ida}}')">Delete</button></a></td>
+                    <td>{{g.state_ida}}</td>
+                    <td>{{g.state_namea}}</td>
+                    <td>{{g.area_target}}</td>
+                    <td>{{g.area_saved}}</td>
+                </tr>
+                {%endfor%}
+                </tr>
+                <form action="{%url 'area' %}" method="POST" id="addrow4">
+                    {%csrf_token%}
+                    <tr id="row4">
+                        <td><input type="checkbox" id="c7">
+                        <td><input type="text" name="State ID"></td>
+                        <td><input type="text" name="State Name"></td>
+                        <td><input type="text" name="Area Target (Ha)"></td>
+                        <td><input type="text" name="Area saved (Ha)"></td>
+
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><input type="submit" id="submitbtn4"></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </form>
+
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container" style="background-color:#00f0b2;position:relative;top:150px;" id="statereports2020_21">
+        <button class="addbtn3" onclick="adddata3()">Add</button>
+
+        <script>
+
+            function adddata3() {
+
+                flag = 5;
+                const collection = document.getElementsByClassName("deletebtn3");
+                for (let i = 0; i < collection.length; i++) {
+                    collection[i].style.display = "none";
+                }
+                document.getElementById("row3").style.display = "table-row";
+                document.getElementById("submitbtn3").style.display = "block";
+
+
+
+            }
+
+            function deletedata3() {
+                flag = 6;
+
+                var td = event.target.parentNode;
+                var tr = td.parentNode;
+                tr.parentNode.removeChild(tr);
+                document.getElementById("submitbtn3").style.display = "block";
+                document.getElementById("row3").style.display = "none";
+
+            }
+        </script>
+        <h4
+            style="position:relative;text-align:center;font-family: monospace;border-bottom: 3px solid  #00997a;top:16px;">
+            State Reports(2020-2021)</h4>
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>State ID</th>
+                    <th>State Name</th>
+                    <th>Cum-Budget (Cr)</th>
+                    <th>Achieved (Cr)</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td><button class="deletebtn3" onclick="deletedata3()">Delete</button></td>
+                    <td>GJ</td>
+                    <td>Gujarat</td>
+                    <td>12.5 Cr</td>
+                    <td>5 Cr</td>
+                </tr>
+
+                <tr>
+                    <td><button class="deletebtn3" onclick="deletedata3()">Delete</button></td>
+                    <td>PB</td>
+                    <td>Punjab</td>
+                    <td>3 Cr</td>
+                    <td>1.47 Cr</td>
+                </tr>
+
+                <tr>
+                    <td><button class="deletebtn3" onclick="deletedata3()">Delete</button></td>
+                    <td>TS</td>
+                    <td>Telengana</td>
+                    <td>13.32 Cr</td>
+                    <td>4.69 Cr</td>
+                </tr>
+
+                <tr>
+                    <td><button class="deletebtn3" onclick="deletedata3()">Delete</button></td>
+                    <td>UP</td>
+                    <td>Uttar Pradesh</td>
+                    <td>15 Cr</td>
+                    <td>14.47 Cr</td>
+                </tr>
+
+                <tr>
+                    {%for m in Dict4 %}
+                <tr>
+                    <td><a href="deletestate/{{m.state_ids}}"><button class="deletebtn3"
+                                onclick="deletedata3('{{m.state_ids}}')">Delete</button></a></td>
+                    <td>{{m.state_ids}}</td>
+                    <td>{{m.state_names}}</td>
+                    <td>{{m.cum_budget}}</td>
+                    <td>{{m.achieved}}</td>
+                </tr>
+                {%endfor%}
+                </tr>
+                <form action="{%url 'state' %}" method="POST" id="addrow3">
+                    {%csrf_token%}
+                    <tr id="row3">
+                        <td><input type="checkbox" id="c7">
+                        <td><input type="text" name="State ID"></td>
+                        <td><input type="text" name="State Name"></td>
+                        <td><input type="text" name="Cum-Budget (Cr)"></td>
+                        <td><input type="text" name="Achieved (Cr)"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><input type="submit" id="submitbtn3"></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </form>
+
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="container" style="background-color:#00f0b2;position:relative;top:150px;" id="statereports2019_20">
+        <button class="addbtn3" onclick="adddata3()">Add</button>
+
+        <script>
+
+            function adddata3() {
+
+                flag = 5;
+                const collection = document.getElementsByClassName("deletebtn3");
+                for (let i = 0; i < collection.length; i++) {
+                    collection[i].style.display = "none";
+                }
+                document.getElementById("row3").style.display = "table-row";
+                document.getElementById("submitbtn3").style.display = "block";
+
+
+
+            }
+
+            function deletedata3() {
+                flag = 6;
+
+                var td = event.target.parentNode;
+                var tr = td.parentNode;
+                tr.parentNode.removeChild(tr);
+                document.getElementById("submitbtn3").style.display = "block";
+                document.getElementById("row3").style.display = "none";
+
+            }
+        </script>
+        <h4
+            style="position:relative;text-align:center;font-family: monospace;border-bottom: 3px solid  #00997a;top:16px;">
+            State Reports(2019-2020)</h4>
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>State ID</th>
+                    <th>State Name</th>
+                    <th>Cum-Budget (Cr)</th>
+                    <th>Achieved (Cr)</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td><button class="deletebtn3" onclick="deletedata3()">Delete</button></td>
+                    <td>SK</td>
+                    <td>Sikkim</td>
+                    <td>4.5 Cr</td>
+                    <td>1.25 Cr</td>
+                </tr>
+
+                <tr>
+                    <td><button class="deletebtn3" onclick="deletedata3()">Delete</button></td>
+                    <td>HP</td>
+                    <td>Himachal Pradesh</td>
+                    <td>7.44 Cr</td>
+                    <td>3.97 Cr</td>
+                </tr>
+
+                <tr>
+                    <td><button class="deletebtn3" onclick="deletedata3()">Delete</button></td>
+                    <td>CG</td>
+                    <td>Chhattisgarh</td>
+                    <td>4.9 Cr</td>
+                    <td>1.1 Cr</td>
+                </tr>
+
+                <tr>
+                    <td><button class="deletebtn3" onclick="deletedata3()">Delete</button></td>
+                    <td>GA</td>
+                    <td>Goa</td>
+                    <td>2 Cr</td>
+                    <td>0.5 Cr</td>
+                </tr>
+
+                <tr>
+                    {%for m in Dict4 %}
+                <tr>
+                    <td><a href="deletestate/{{m.state_ids}}"><button class="deletebtn3"
+                                onclick="deletedata3('{{m.state_ids}}')">Delete</button></a></td>
+                    <td>{{m.state_ids}}</td>
+                    <td>{{m.state_names}}</td>
+                    <td>{{m.cum_budget}}</td>
+                    <td>{{m.achieved}}</td>
+                </tr>
+                {%endfor%}
+                </tr>
+                <form action="{%url 'state' %}" method="POST" id="addrow3">
+                    {%csrf_token%}
+                    <tr id="row3">
+                        <td><input type="checkbox" id="c7">
+                        <td><input type="text" name="State ID"></td>
+                        <td><input type="text" name="State Name"></td>
+                        <td><input type="text" name="Cum-Budget (Cr)"></td>
+                        <td><input type="text" name="Achieved (Cr)"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><input type="submit" id="submitbtn3"></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </form>
+
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="container" style="background-color:#00f0b2;position:relative;top:150px;" id="statereports2018_19">
+        <button class="addbtn3" onclick="adddata3()">Add</button>
+
+        <script>
+
+            function adddata3() {
+
+                flag = 5;
+                const collection = document.getElementsByClassName("deletebtn3");
+                for (let i = 0; i < collection.length; i++) {
+                    collection[i].style.display = "none";
+                }
+                document.getElementById("row3").style.display = "table-row";
+                document.getElementById("submitbtn3").style.display = "block";
+
+
+
+            }
+
+            function deletedata3() {
+                flag = 6;
+
+                var td = event.target.parentNode;
+                var tr = td.parentNode;
+                tr.parentNode.removeChild(tr);
+                document.getElementById("submitbtn3").style.display = "block";
+                document.getElementById("row3").style.display = "none";
+
+            }
+        </script>
+        <h4
+            style="position:relative;text-align:center;font-family: monospace;border-bottom: 3px solid  #00997a;top:16px;">
+            State Reports(2018-2019)</h4>
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>State ID</th>
+                    <th>State Name</th>
+                    <th>Cum-Budget (Cr)</th>
+                    <th>Achieved (Cr)</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td><button class="deletebtn3" onclick="deletedata3()">Delete</button></td>
+                    <td>MN</td>
+                    <td>Manipur</td>
+                    <td>2.5 Cr</td>
+                    <td>1.77 Cr</td>
+                </tr>
+
+                <tr>
+                    <td><button class="deletebtn3" onclick="deletedata3()">Delete</button></td>
+                    <td>ML</td>
+                    <td>Meghalaya</td>
+                    <td>3.98 Cr</td>
+                    <td>1.47 Cr</td>
+                </tr>
+
+                <tr>
+                    <td><button class="deletebtn3" onclick="deletedata3()">Delete</button></td>
+                    <td>AS</td>
+                    <td>Assam</td>
+                    <td>1.7 Cr</td>
+                    <td>1 Cr</td>
+                </tr>
+
+                <tr>
+                    <td><button class="deletebtn3" onclick="deletedata3()">Delete</button></td>
+                    <td>TR</td>
+                    <td>Tripura</td>
+                    <td>8 Cr</td>
+                    <td>4.85 Cr</td>
+                </tr>
+
+                <tr>
+                    {%for m in Dict4 %}
+                <tr>
+                    <td><a href="deletestate/{{m.state_ids}}"><button class="deletebtn3"
+                                onclick="deletedata3('{{m.state_ids}}')">Delete</button></a></td>
+                    <td>{{m.state_ids}}</td>
+                    <td>{{m.state_names}}</td>
+                    <td>{{m.cum_budget}}</td>
+                    <td>{{m.achieved}}</td>
+                </tr>
+                {%endfor%}
+                </tr>
+                <form action="{%url 'state' %}" method="POST" id="addrow3">
+                    {%csrf_token%}
+                    <tr id="row3">
+                        <td><input type="checkbox" id="c7">
+                        <td><input type="text" name="State ID"></td>
+                        <td><input type="text" name="State Name"></td>
+                        <td><input type="text" name="Cum-Budget (Cr)"></td>
+                        <td><input type="text" name="Achieved (Cr)"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><input type="submit" id="submitbtn3"></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </form>
+
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="container" style="background-color:#00f0b2;position:relative;top:150px;" id="statereports2017_18">
+        <button class="addbtn3" onclick="adddata3()">Add</button>
+
+        <script>
+
+            function adddata3() {
+
+                flag = 5;
+                const collection = document.getElementsByClassName("deletebtn3");
+                for (let i = 0; i < collection.length; i++) {
+                    collection[i].style.display = "none";
+                }
+                document.getElementById("row3").style.display = "table-row";
+                document.getElementById("submitbtn3").style.display = "block";
+
+
+
+            }
+
+            function deletedata3() {
+                flag = 6;
+
+                var td = event.target.parentNode;
+                var tr = td.parentNode;
+                tr.parentNode.removeChild(tr);
+                document.getElementById("submitbtn3").style.display = "block";
+                document.getElementById("row3").style.display = "none";
+
+            }
+        </script>
+        <h4
+            style="position:relative;text-align:center;font-family: monospace;border-bottom: 3px solid  #00997a;top:16px;">
+            State Reports(2017-2018)</h4>
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>State ID</th>
+                    <th>State Name</th>
+                    <th>Cum-Budget (Cr)</th>
+                    <th>Achieved (Cr)</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td><button class="deletebtn3" onclick="deletedata3()">Delete</button></td>
+                    <td>JH</td>
+                    <td>Jharkhand</td>
+                    <td>5 Cr</td>
+                    <td>2.5 Cr</td>
+                </tr>
+
+                <tr>
+                    <td><button class="deletebtn3" onclick="deletedata3()">Delete</button></td>
+                    <td>NL</td>
+                    <td>Nagaland</td>
+                    <td>3.6 Cr</td>
+                    <td>1.98 Cr</td>
+                </tr>
+
+                <tr>
+                    <td><button class="deletebtn3" onclick="deletedata3()">Delete</button></td>
+                    <td>TS</td>
+                    <td>Telengana</td>
+                    <td>13.32 Cr</td>
+                    <td>4.69 Cr</td>
+                </tr>
+
+                <tr>
+                    <td><button class="deletebtn3" onclick="deletedata3()">Delete</button></td>
+                    <td>AR</td>
+                    <td>Arunachal Pradesh</td>
+                    <td>9 Cr</td>
+                    <td>4.87 Cr</td>
+                </tr>
+
+                <tr>
+                    {%for m in Dict4 %}
+                <tr>
+                    <td><a href="deletestate/{{m.state_ids}}"><button class="deletebtn3"
+                                onclick="deletedata3('{{m.state_ids}}')">Delete</button></a></td>
+                    <td>{{m.state_ids}}</td>
+                    <td>{{m.state_names}}</td>
+                    <td>{{m.cum_budget}}</td>
+                    <td>{{m.achieved}}</td>
+                </tr>
+                {%endfor%}
+                </tr>
+                <form action="{%url 'state' %}" method="POST" id="addrow3">
+                    {%csrf_token%}
+                    <tr id="row3">
+                        <td><input type="checkbox" id="c7">
+                        <td><input type="text" name="State ID"></td>
+                        <td><input type="text" name="State Name"></td>
+                        <td><input type="text" name="Cum-Budget (Cr)"></td>
+                        <td><input type="text" name="Achieved (Cr)"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><input type="submit" id="submitbtn3"></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </form>
+
+            </tbody>
+        </table>
+
+    </div>
+
+
+    <div class="container" style="background-color:#00f0b2;position:relative;top:150px;" id="statereports">
+        <button class="addbtn1" onclick="adddata1()">Add</button>
+        <script>
+            var flag = 0;
+            function adddata1() {
+
+                flag = 1;
+                const collection = document.getElementsByClassName("deletebtn1");
+                for (let i = 0; i < collection.length; i++) {
+                    collection[i].style.display = "none";
+                }
+                document.getElementById("row1").style.display = "table-row";
+                document.getElementById("submitbtn").style.display = "block";
+
+            }
+
+            function deletedata1(sid) {
+                flag = 2;
+                var td = event.target.parentNode;
+                var tr = td.parentNode;
+                confirm("Are you sure?")
+                tr.parentNode.removeChild(tr);
+                document.getElementById("submitbtn").style.display = "block";
+                document.getElementById("row1").style.display = "none";
+
+            }
+        </script>
+        <h4
+            style="position:relative;text-align:center;font-family: monospace;border-bottom: 3px solid  #00997a;top:16px;">
+            State Reports(2021-2022)</h4>
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>State ID</th>
+                    <th>State Name</th>
+                    <th>Target</th>
+                    <th>Profit amount</th>
+                </tr>
+            </thead>
+
+            <tr>
+                <td><button class="deletebtn1" onclick="deletedata1('TN')">Delete</button></td>
+                <td>TN</td>
+                <td>Tamil Nadu</td>
+                <td>21 Cr</td>
+                <td>6 Cr</td>
+            </tr>
+
+            <tr>
+                <td><button class="deletebtn1" onclick="deletedata1('TN')">Delete</button></td>
+                <td>AP</td>
+                <td>Andhra Pradesh</td>
+                <td>25 Cr</td>
+                <td>9 Cr</td>
+            </tr>
+
+            <tr>
+                <td><button class="deletebtn1" onclick="deletedata1('TN')">Delete</button></td>
+                <td>KA</td>
+                <td>Karnataka</td>
+                <td>11.5 Cr</td>
+                <td>4.21 Cr</td>
+            </tr>
+
+            <tr>
+                <td><button class="deletebtn1" onclick="deletedata1('TN')">Delete</button></td>
+                <td>MN</td>
+                <td>Manipur</td>
+                <td>7.3 Cr</td>
+                <td>2.87 Cr</td>
+            </tr>
+
+            <tr>
+                <td><button class="deletebtn1" onclick="deletedata1('TN')">Delete</button></td>
+                <td>WB</td>
+                <td>West Bengal</td>
+                <td>12.3 Cr</td>
+                <td>7.32 Cr</td>
+            </tr>
+
+            <tr>
+                <td><button class="deletebtn1" onclick="deletedata1('KL')">Delete</button></td>
+                <td>KL</td>
+                <td>Kerala</td>
+                <td>15 Cr</td>
+                <td>3 Cr</td>
+            </tr>
+
+            <tr>
+                <td><button class="deletebtn1" onclick="deletedata1('MH')">Delete</button></td>
+                <td>MH</td>
+                <td>Maharashtra</td>
+                <td>30 Cr</td>
+                <td>8 Cr</td>
+            </tr>
+
+            <tr>
+                <td><button class="deletebtn1" onclick="deletedata1('BR')">Delete</button></td>
+                <td>BR</td>
+                <td>Bihar</td>
+                <td>8 Cr</td>
+                <td>-1.5 Cr</td>
+            </tr>
+
+
+
+            {%for i in Dict1 %}
+            <tr>
+                <td><a href="deletebenefits/{{i.state_idb}}"><button class="deletebtn1"
+                            onclick="deletedata1('{{i.state_idb}}')">Delete</button></a></td>
+                <td>{{i.state_idb}}</td>
+                <td>{{i.state_nameb}}</td>
+                <td>{{i.target}}</td>
+                <td>{{i.profit_amt}}</td>
+            </tr>
+            {%endfor%}
+
+            <form action="{%url 'reports'%}" method="POST" id="addrow1">
+                {%csrf_token%}
+                <tr id="row1">
+                    <td><input type="checkbox" id="c7">
+                    <td><input type="text" name="stateid"></td>
+                    <td><input type="text" name="statename"></td>
+                    <td><input type="text" name="Target"></td>
+                    <td><input type="text" name="Profit amount"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><input type="submit" id="submitbtn"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </form>
+        </table>
+
+    </div>
+
+    <div class="container" style="background-color:#00f0b2;position:relative;top:150px;" id="sortstates">
+        <button class="addbtn1" onclick="adddata1()">Add</button>
+        <script>
+            var flag = 0;
+            function adddata1() {
+
+                flag = 1;
+                const collection = document.getElementsByClassName("deletebtn1");
+                for (let i = 0; i < collection.length; i++) {
+                    collection[i].style.display = "none";
+                }
+                document.getElementById("row1").style.display = "table-row";
+                document.getElementById("submitbtn").style.display = "block";
+
+            }
+
+            function deletedata1(sid) {
+                flag = 2;
+                var td = event.target.parentNode;
+                var tr = td.parentNode;
+                confirm("Are you sure?")
+                tr.parentNode.removeChild(tr);
+                document.getElementById("submitbtn").style.display = "block";
+                document.getElementById("row1").style.display = "none";
+
+            }
+        </script>
+        <h4
+            style="position:relative;text-align:center;font-family: monospace;border-bottom: 3px solid  #00997a;top:16px;">
+            State Reports(2021-2022)</h4>
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>State ID</th>
+                    <th>State Name</th>
+                    <th>Target</th>
+                    <th>Profit amount</th>
+                </tr>
+            </thead>
+
+
+            <tr>
+                <td><button class="deletebtn1" onclick="deletedata1('TN')">Delete</button></td>
+                <td>AP</td>
+                <td>Andhra Pradesh</td>
+                <td>25 Cr</td>
+                <td>9 Cr</td>
+            </tr>
+
+            <tr>
+                <td><button class="deletebtn1" onclick="deletedata1('BR')">Delete</button></td>
+                <td>BR</td>
+                <td>Bihar</td>
+                <td>8 Cr</td>
+                <td>-1.5 Cr</td>
+            </tr>
+
+            <tr>
+                <td><button class="deletebtn1" onclick="deletedata1('TN')">Delete</button></td>
+                <td>KA</td>
+                <td>Karnataka</td>
+                <td>11.5 Cr</td>
+                <td>4.21 Cr</td>
+            </tr>
+
+            <tr>
+                <td><button class="deletebtn1" onclick="deletedata1('KL')">Delete</button></td>
+                <td>KL</td>
+                <td>Kerala</td>
+                <td>15 Cr</td>
+                <td>3 Cr</td>
+            </tr>
+
+
+            <tr>
+                
+                <td><button class="deletebtn1" onclick="deletedata1('MH')">Delete</button></td>
+                <td>MH</td>
+                <td>Maharashtra</td>
+                <td>30 Cr</td>
+                <td>8 Cr</td>
+            </tr>
+
+            <tr>
+                <td><button class="deletebtn1" onclick="deletedata1('TN')">Delete</button></td>
+                <td>MN</td>
+                <td>Manipur</td>
+                <td>7.3 Cr</td>
+                <td>2.87 Cr</td>
+            </tr>
+
+            <tr>
+                <td><button class="deletebtn1" onclick="deletedata1('TN')">Delete</button></td>
+                <td>TN</td>
+                <td>Tamil Nadu</td>
+                <td>21 Cr</td>
+                <td>6 Cr</td>
+                
+            </tr>
+
+            <tr>
+                <td><button class="deletebtn1" onclick="deletedata1('TN')">Delete</button></td>
+                <td>WB</td>
+                <td>West Bengal</td>
+                <td>12.3 Cr</td>
+                <td>7.32 Cr</td>
+            </tr>
+
+
+            {%for i in Dict1 %}
+            <tr>
+                <td><a href="deletebenefits/{{i.state_idb}}"><button class="deletebtn1"
+                            onclick="deletedata1('{{i.state_idb}}')">Delete</button></a></td>
+                <td>{{i.state_idb}}</td>
+                <td>{{i.state_nameb}}</td>
+                <td>{{i.target}}</td>
+                <td>{{i.profit_amt}}</td>
+            </tr>
+            {%endfor%}
+
+            <form action="{%url 'reports'%}" method="POST" id="addrow1">
+                {%csrf_token%}
+                <tr id="row1">
+                    <td><input type="checkbox" id="c7">
+                    <td><input type="text" name="stateid"></td>
+                    <td><input type="text" name="statename"></td>
+                    <td><input type="text" name="Target"></td>
+                    <td><input type="text" name="Profit amount"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><input type="submit" id="submitbtn"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </form>
+        </table>
+
+    </div>
+
+    <div class="container" style="background-color:#00f0b2;position:relative;top:150px;" id="maxstate">
+        <button class="addbtn1" onclick="adddata1()">Add</button>
+        <script>
+            var flag = 0;
+            function adddata1() {
+
+                flag = 1;
+                const collection = document.getElementsByClassName("deletebtn1");
+                for (let i = 0; i < collection.length; i++) {
+                    collection[i].style.display = "none";
+                }
+                document.getElementById("row1").style.display = "table-row";
+                document.getElementById("submitbtn").style.display = "block";
+
+            }
+
+            function deletedata1(sid) {
+                flag = 2;
+                var td = event.target.parentNode;
+                var tr = td.parentNode;
+                confirm("Are you sure?")
+                tr.parentNode.removeChild(tr);
+                document.getElementById("submitbtn").style.display = "block";
+                document.getElementById("row1").style.display = "none";
+
+            }
+        </script>
+        <h4
+            style="position:relative;text-align:center;font-family: monospace;border-bottom: 3px solid  #00997a;top:16px;">
+            State Reports(2021-2022)</h4>
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>State ID</th>
+                    <th>State Name</th>
+                    <th>Target</th>
+                    <th>Profit amount</th>
+                </tr>
+            </thead>
+ 
+
+            <tr>
+                <td><button class="deletebtn1" onclick="deletedata1('TN')">Delete</button></td>
+                <td>AP</td>
+                <td>Andhra Pradesh</td>
+                <td>25 Cr</td>
+                <td>9 Cr</td>
+            </tr>
+
+
+            {%for i in Dict1 %}
+            <tr>
+                <td><a href="deletebenefits/{{i.state_idb}}"><button class="deletebtn1"
+                            onclick="deletedata1('{{i.state_idb}}')">Delete</button></a></td>
+                <td>{{i.state_idb}}</td>
+                <td>{{i.state_nameb}}</td>
+                <td>{{i.target}}</td>
+                <td>{{i.profit_amt}}</td>
+            </tr>
+            {%endfor%}
+
+            <form action="{%url 'reports'%}" method="POST" id="addrow1">
+                {%csrf_token%}
+                <tr id="row1">
+                    <td><input type="checkbox" id="c7">
+                    <td><input type="text" name="stateid"></td>
+                    <td><input type="text" name="statename"></td>
+                    <td><input type="text" name="Target"></td>
+                    <td><input type="text" name="Profit amount"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><input type="submit" id="submitbtn"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </form>
+        </table>
+
+    </div>
+
+    <div class="container" style="background-color:#00f0b2;position:relative;top:150px;" id="minstate">
+        <button class="addbtn1" onclick="adddata1()">Add</button>
+        <script>
+            var flag = 0;
+            function adddata1() {
+
+                flag = 1;
+                const collection = document.getElementsByClassName("deletebtn1");
+                for (let i = 0; i < collection.length; i++) {
+                    collection[i].style.display = "none";
+                }
+                document.getElementById("row1").style.display = "table-row";
+                document.getElementById("submitbtn").style.display = "block";
+
+            }
+
+            function deletedata1(sid) {
+                flag = 2;
+                var td = event.target.parentNode;
+                var tr = td.parentNode;
+                confirm("Are you sure?")
+                tr.parentNode.removeChild(tr);
+                document.getElementById("submitbtn").style.display = "block";
+                document.getElementById("row1").style.display = "none";
+
+            }
+        </script>
+        <h4
+            style="position:relative;text-align:center;font-family: monospace;border-bottom: 3px solid  #00997a;top:16px;">
+            State Reports(2021-2022)</h4>
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>State ID</th>
+                    <th>State Name</th>
+                    <th>Target</th>
+                    <th>Profit amount</th>
+                </tr>
+            </thead>
+
+            <tr>
+                <td><button class="deletebtn1" onclick="deletedata1('BR')">Delete</button></td>
+                <td>BR</td>
+                <td>Bihar</td>
+                <td>8 Cr</td>
+                <td>-1.5 Cr</td>
+            </tr>
+
+
+            {%for i in Dict1 %}
+            <tr>
+                <td><a href="deletebenefits/{{i.state_idb}}"><button class="deletebtn1"
+                            onclick="deletedata1('{{i.state_idb}}')">Delete</button></a></td>
+                <td>{{i.state_idb}}</td>
+                <td>{{i.state_nameb}}</td>
+                <td>{{i.target}}</td>
+                <td>{{i.profit_amt}}</td>
+            </tr>
+            {%endfor%}
+
+            <form action="{%url 'reports'%}" method="POST" id="addrow1">
+                {%csrf_token%}
+                <tr id="row1">
+                    <td><input type="checkbox" id="c7">
+                    <td><input type="text" name="stateid"></td>
+                    <td><input type="text" name="statename"></td>
+                    <td><input type="text" name="Target"></td>
+                    <td><input type="text" name="Profit amount"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><input type="submit" id="submitbtn"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </form>
+        </table>
+
+    </div>
+
+
+
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #353935;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: sticky;
+            background-color: #00ffa3;
+
+        }
+
+        .dropdownbelowtext {
+            font-size: 23px;
+            font-weight: bolder;
+            color: #00ffa3;
+            position: relative;
+            top: 120px;
+        }
+
+        .dropdowndiv {
+            width:100%;
+            position: relative;
+            top: 60px;
+            left: 10%;
+            display: inline-block;
+        }
+
+        .dropdowndiv2 {
+            width:100%;
+            position:relative;
+            top: 25px;
+            left:45%;
+            display:inline-block;
+        }
+
+        .dropdown-content {
+            width:100%;
+            background-color: white;
+        }
+
+        .dropdownbutton1 {
+            display: inline-block;
+            border: none;
+            outline: none;
+            height: 50px;
+            width:400px;
+            background-color: #00997a;
+            font-family: monospace;
+            font-size: 15px;
+            transition: 0.5s;
+        }
+
+        .dropdownbutton2 {
+            display: inline-block;
+            border: none;
+            outline: none;
+            height: 50px;
+            width:200px;
+            background-color: #00997a;
+            font-family: monospace;
+            font-size: 15px;
+            transition: 0.5s;
+        }
+
+        .dropdownbutton1:hover {
+            background-color: black;
+            color: white;
+        }
+
+        .dropdownbutton2:hover{
+            background-color: black;
+            color: white;
+        }
+        .logo1 {
+            position: relative;
+            height: 65px;
+            width: 70px;
+            left: 0.5%;
+        }
+
+        .reportswallpaper {
+            position: relative;
+            display: block;
+            height: 80%;
+            width: 100%;
+            top: 20%;
+
+        }
+
+        th {
+            font-family: monospace;
+            font-size: 18px;
+        }
+
+        th,
+        td {
+            text-align: center;
+        }
+
+        #submitbtn {
+            width: 100px;
+            height: 35px;
+            display: none;
+            position: relative;
+            left: 220px;
+        }
+
+        #submitbtn2 {
+            width: 100px;
+            height: 35px;
+            display: none;
+            position: relative;
+            left: 220px;
+
+        }
+
+        #submitbtn3 {
+            width: 100px;
+            height: 35px;
+            display: none;
+            position: relative;
+            left: 240px;
+
+        }
+
+        #submitbtn4 {
+            width: 100px;
+            height: 35px;
+            display: none;
+            position: relative;
+            left: 270px;
+
+        }
+
+        .addbtn1 {
+            border: none;
+            position: relative;
+            width: 100px;
+            height: 35px;
+            top: 20px;
+            left: 10px;
+            text-align: center;
+            transition: 0.5s;
+        }
+
+        .addbtn1:hover {
+            background-color: #8F8E8E;
+            color: white;
+            border: none;
+        }
+
+        .addbtn1:active {
+            border: none;
+        }
+
+        .addbtn2 {
+            position: relative;
+            width: 100px;
+            height: 35px;
+            top: 20px;
+            left: 10px;
+            text-align: center;
+            transition: 0.5s;
+        }
+
+        .addbtn2:hover {
+            background-color: #8F8E8E;
+            color: white;
+            border: none;
+        }
+
+        .addbtn2:active {
+            border: none;
+        }
+
+        .addbtn3 {
+            position: relative;
+            width: 100px;
+            height: 35px;
+            top: 20px;
+            left: 10px;
+            text-align: center;
+            transition: 0.5s;
+        }
+
+        .addbtn3:hover {
+            background-color: #8F8E8E;
+            color: white;
+            border: none;
+        }
+
+        .addbtn3:active {
+            border: none;
+        }
+
+        .addbtn4 {
+            position: relative;
+            width: 100px;
+            height: 35px;
+            top: 20px;
+            left: 10px;
+            text-align: center;
+            transition: 0.5s;
+        }
+
+        .addbtn4:hover {
+            background-color: #8F8E8E;
+            color: white;
+            border: none;
+        }
+
+        .addbtn4:active {
+            border: none;
+        }
+
+
+        .deletebtn1 {
+            position: relative;
+            width: 100px;
+            height: 35px;
+            top: 0px;
+            left: 0px;
+            text-align: center;
+            transition: 0.5s;
+        }
+
+        .deletebtn1:hover {
+            background-color: #8F8E8E;
+            color: white;
+            border: none;
+        }
+
+        .deletebtn1:active {
+            border: none;
+        }
+
+        .deletebtn2 {
+            position: relative;
+            width: 100px;
+            height: 35px;
+            top: 0px;
+            left: 0px;
+            text-align: center;
+            transition: 0.5s;
+        }
+
+        .deletebtn2:hover {
+            background-color: #8F8E8E;
+            color: white;
+            border: none;
+        }
+
+        .deletebtn2:active {
+            border: none;
+        }
+
+        .deletebtn3 {
+            position: relative;
+            width: 100px;
+            height: 35px;
+            top: 0px;
+            left: 0px;
+            text-align: center;
+            transition: 0.5s;
+        }
+
+        .deletebtn3:hover {
+            background-color: #8F8E8E;
+            color: white;
+            border: none;
+        }
+
+        .deletebtn3:active {
+            border: none;
+        }
+
+        .deletebtn4 {
+            position: relative;
+            width: 100px;
+            height: 35px;
+            top: 0px;
+            left: 0px;
+            text-align: center;
+            transition: 0.5s;
+        }
+
+        .deletebtn4:hover {
+            background-color: #8F8E8E;
+            color: white;
+            border: none;
+        }
+
+        .deletebtn4:active {
+            border: none;
+        }
+
+        .submitbtn:hover {
+            background-color: #8F8E8E;
+            color: white;
+        }
+
+
+        #checkbx {
+            display: none;
+        }
+
+        #addrow1 {
+            display: none;
+        }
+
+        #addrow2 {
+            display: none;
+        }
+
+        #addrow3 {
+            display: none;
+        }
+
+        #addrow4 {
+            display: none;
+        }
+
+        #row1 {
+            display: none;
+        }
+
+        #row2 {
+            display: none;
+        }
+
+        #row3 {
+            display: none;
+        }
+
+        #row4 {
+            display: none;
+        }
+
+        #statereports {
+            display: none;
+        }
+
+        #statereports2020_21 {
+            display: none;
+        }
+
+        #statereports2019_20 {
+            display: none;
+        }
+
+        #statereports2018_19 {
+            display: none;
+        }
+
+        #statereports2017_18 {
+            display: none;
+        }
+
+        #sortstates {
+            display: none;
+        }
+
+        #maxtate {
+            display: none;
+        }
+
+        #minstate {
+            display: none;
+        }
+
+        .sortz{
+        position:absolute;
+        width:100%;
+        top:125px;
+        left:65%;
+    }
+
+    
+    .max{
+        position:absolute;
+        width:100%;
+        top:125px;
+        left:75%;
+    }
+
+    .min{
+        position:absolute;
+        width:100%;
+        top:125px;
+        left:85%;
+    }
+
+
+    .sortmaxminbtn{
+            display:inline-block;
+            border:none;
+            outline:none;
+            height:40px;
+            width:100px;
+            background-color: #00997a;
+            font-family: monospace;
+            font-size: 15px;
+            transition: 0.5s;
+        }
+
+        .sortmaxminbtn:hover{
+            background-color: black;
+            color: white;
+        }
+
+        #benefits {
+            display: none;
+        }
+
+        #water {
+            display: none;
+        }
+
+        #area {
+            display: none;
+        }
+    </style>
+</body>
+
+</html>
+{%endblock%}

@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIR - Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+{%block content%}
+
+<body>
+    {%load static%}
+    <nav>
+        <div class="nav-wrapper">
+          <a href="{%url 'home'%}" class="logo1"><img src="{%static 'coca-leaves.png'%}" class="logo1"></a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="{%url 'login'%}" style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Login</a></li>
+            <li><a href="{%url 'register'%}" style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Register</a></li>
+            <li><a href="{%url 'reports'%}" style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Reports</a></li>
+            <li><a href="{%url 'visuals'%}" style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Visuals</a></li>
+            <li><a href="{%url 'contacts'%}" style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Contacts</a></li>
+          </ul>
+        </div>
+      </nav>
+    <div class = "loginsupercard">
+        <div class = "logincard">
+            <h5>Login</h5>
+            <form method ="POST" id="loginform" action=" ">
+            {%csrf_token%}
+            <input type="text" placeholder="User Name" name="username" required><br><br>
+            <input type="password" placeholder="Password" name="password" required><br>
+            <a href="{%url 'register'%}">Create new account?</a><br><br><br>
+            </form>
+            <button class = "submitbut" onclick="Submit()">Submit</button>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function Submit(){
+            document.getElementById('loginform').submit();
+        }
+    </script>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        
+        body{
+            background-color: #353935;
+        }
+
+        nav{
+            position:sticky;
+            background-color: #00ffa3;
+            
+        }
+
+        .logo1{
+            position:relative;
+            height:65px;
+            width:70px;
+            left:0.5%;
+        }
+        
+        h5{
+            position:relative;
+            text-align:center;
+            top:0;
+            font-family: monospace;
+        }
+        form{
+            position:relative;
+            top:5%;
+            left:16%;
+            width:232px;
+            display:inline-block;
+            color:black;
+        }
+
+        .loginsupercard{
+            display:flex;
+            position:absolute;
+            top: 30%;
+            left: 38%;
+            height:340px;
+            width:350px;
+            align-items: center;
+        }
+        .logincard{
+            position:relative;
+            height:340px;
+            width:350px;
+            background-color:#00ffcc;
+            color:black;
+            border-radius: 5px;
+        }
+        input{
+            font-size:18px;
+            color:black;
+            height:35px;
+            width:220px;
+            padding-left: 5%;
+            border:none;
+            font-size:15px;
+        }
+
+        input:focus{
+            outline:none;
+            border:none;
+            background-color: transparent;
+            box-shadow: none;
+        }
+        
+        input:-webkit-autofill { 
+            -webkit-background-clip: text;
+        }
+
+        ::placeholder{
+            color:#8F8E8E;
+        }
+        .submitbut{
+            border:none;
+            background-color: white;
+            color:black;
+            text-align: center;
+            position:relative;
+            height:30px;
+            width:100%;
+            font-family: monospace;
+            transition:0.5s;
+        }
+
+        .submitbut:hover{
+            background-color: #8F8E8E;
+            color:white;
+        }
+    </style>
+
+</body>
+</html>
+{%endblock%}

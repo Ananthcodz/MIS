@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIR - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+</head>
+
+<body>
+    {%load static%}
+    <nav>
+        <div class="nav-wrapper">
+          <a href="{%url 'home'%}" class="logo1"><img src="{%static 'coca-leaves.png'%}" class="logo1"></a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="{%url 'login'%}" style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Login</a></li>
+            <li><a href="{%url 'register'%}" style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Register</a></li>
+            <li><a href="{%url 'reports'%}" style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Reports</a></li>
+            <li><a href="{%url 'visuals'%}" style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Visuals</a></li>
+            <li><a href="{%url 'contacts'%}" style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Contacts</a></li>
+          </ul>
+        </div>
+      </nav>
+      
+
+    <div class="row" style="border-bottom:#00ffa3 solid 3px;">
+
+        <div class="col s3">
+            <h5 style="position:relative;left:10%">Area Covered (2021-22)</h5>
+            <hr class="hr1">
+            <p class="areapara">
+                <b>Micro Irrigation</b><br>Drip : 3.58 Lakh Ha<br>Sprinkler : 6.57 Lakh Ha<br>Total : 10.15 Lakh Ha<br><br>
+            </p>
+            <h5 style="position:relative;left:10%;top:40px">Drip irrigation Achievements (2021-22)</h5>
+            <hr class="hr1" style="position:relative;top:30px">
+            <p class = "areapara2">Physical : 358488.8 Ha<br>Financial : 73143.2 La<br><br>
+            </p>
+            <h5 style="position:relative;left:10%;top:60px">Sprinkler irrigation Achievements (2021-22)</h5>
+            <hr class="hr1" style="position:relative;top:50px">
+            <p class = "areapara2" style="position:relative;top:80px">Physical : 656584.8	Ha<br>Financial : 42373.9 La<br><br>
+            </p>
+        </div>
+  
+        <div class="col s6" style="border-left:3px solid #00ffa3;border-right:3px solid #00ffa3;min-height:670px;">
+            <h5 style="position:relative;left:9%;font-family:monospace;">PMKSY - Pradhan Mantri Krishi Sinchayee Yojana</h5>
+            <hr class="hr2">
+            <p class="mainpara1"><b>Har Khet ko Pani</b> “Prime Minister Krishi Sinchayee Yojana”<br><br>Government of India is committed to accord high priority to water conservation and its
+                management. To this effect Pradhan Mantri Krishi Sinchayee Yojana (PMKSY) has been formulated with the vision of extending the coverage of irrigation 'Har Khet ko pani' and 
+                improving water use efficiency <b>'More crop per drop'</b> in a focused manner with end to end solution on source creation, distribution, management, field application and extension 
+                activities. The Cabinet Committee on Economic Affairs chaired by Hon'ble Prime Minister has accorded approval of Pradhan Mantri Krishi Sinchayee Yojana (PMKSY) in its meeting 
+                held on 1st July, 2015.<br><br><br></p>
+                <img class="slider1" src="{%static 'mirslider1.jpg' %}">
+                <img class="slider1" src="{%static 'mirslider2.jpg' %}">
+                <img class="slider1" src="{%static 'mirslider3.jpg' %}">
+                <img class="slider1" src="{%static 'mirslider4.jpg' %}">
+                <script>
+                    var myIndex = 0;
+                    carousel();
+        
+                    function carousel() {
+                    var i;
+                    var x = document.getElementsByClassName("slider1");
+                    for (i = 0; i < x.length; i++) {
+                        x[i].style.display = "none";  
+                    }
+                    myIndex++;
+                    if (myIndex > x.length) {myIndex = 1}    
+                    x[myIndex-1].style.display = "inline-block";  
+                    setTimeout(carousel, 5000);
+                    }
+                </script>
+        
+        </div>
+        <div class="col s3">
+            <h5 style="position:relative;left:28%;">Visualization</h5>
+            <hr class="hr3">
+            <img src="{%static 'reportgraph1.png'%}" style="position:relative;top:60px;left:0%;width:100%;height:105%;display:inline-block">
+            <img src="{%static 'reportgraph2.png'%}" style="position:relative;top:105px;left:40px;width:80%;height:80%;display:inline-block">
+            <p class="sidepara"></p>
+        </div>
+    </div>
+       
+        <button class="submitbtn1" onclick="relocate()"><b>Register For Volunteering</b><br><br><br>Terms and conditions apply*</button>
+                <script>
+                    function relocate(){
+                        location.replace("{%url 'register'%}");
+                    }
+                </script>
+    <style>
+        .slider1{
+            position:relative;
+            left:2%;
+            display:none;
+            height:300px;
+            width:700px;
+            opacity:0.8;
+
+        }
+
+        
+        *{
+            margin:0;
+            padding:0;
+        }
+
+        body{
+            background-color: #353935;
+            overflow-x:hidden;
+            
+        }
+
+        nav{
+            position: sticky;
+            background-color: #00ffa3;
+        }
+
+        .logo1{
+            position:relative;
+            height:65px;
+            width:70px;
+            left:0.5%;
+        }
+
+        .maincard{
+            display:inline-block;
+            border-radius:4px;
+            box-shadow: 1px 2px 2px 2px #4dffb8;
+            background-color: #00ffa3;
+            position:relative;
+            height:600px;
+            width:90%;
+            top:50px;
+            left:5%;
+        }
+
+        .subcard1{
+            display:inline-block;
+            border-right: 2px solid black;
+            position:relative;
+            top:0%;
+            height: 95%;
+            width:20%;
+        }
+        
+        .subcard2{
+            display:inline-block;
+            border-right: 2px solid black;
+            position:relative;
+            top:5%;
+            height: 95%;
+            width:52%;
+        }
+        
+
+        h5{
+            display:inline-block;
+            position:relative;
+            top:0px;
+            left:0%;
+            font-weight:bolder;
+            font-family: monospace;
+            color:#00e6b8;
+            text-shadow:4px 2px 5px black;
+        }
+
+        .hr1{
+            display: inline-block;
+            position:relative;
+            left:0%;
+            width:365px;
+            height:3px;
+            background-color: #bfbfbf;
+            border:none;
+        }
+
+        .hr2{
+            display: inline-block;
+            position:relative;
+            top:0px;
+            width:740px;
+            height:3px;
+            background-color: #bfbfbf;
+            border:none;
+        }
+
+        .hr3{
+            display: inline-block;
+            position:relative;
+            top:0px;
+            left:0%;
+            width:360px;
+            height:3px;
+            background-color: #bfbfbf;
+            border:none;
+        }
+        .areapara{
+            position:relative;
+            font-family:monospace;
+            top:30px;
+            left:3%;
+            color:#bfbfbf;
+            font-size:18px;
+        }
+
+        .areapara2{
+            position:relative;
+            font-family:monospace;
+            top:60px;
+            left:3%;
+            color:#bfbfbf;
+            font-size:18px;
+        }
+        .mainpara1{
+            font-family: monospace;
+            font-size:18px;
+            color: #bfbfbf;
+            display:inline-block;
+            position:relative;
+            top:30px;
+            left:1%;
+        }
+
+        .submitbtn1{
+            display:inline-block;
+            position:relative;
+            top:0;
+            left:0;
+            height:200px;
+            width:100%;
+            font-family: monospace;
+            font-size:20px;
+            background-color: black;
+            color: #00ffa3;
+            transition: all 0.5s;
+            border:none;
+        }
+
+        .submitbtn1:hover{
+            background-color: white;
+            color:black;
+            border:none;
+        }
+
+    
+        
+    </style>
+</body>
+</html>

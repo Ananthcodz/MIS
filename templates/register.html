@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIR - Register</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+{%block content%}
+<body>
+
+    {%load static%}
+    <nav>
+        <div class="nav-wrapper">
+          <a href="{%url 'home'%}" class="logo1"><img src="{%static 'coca-leaves.png'%}" class="logo1"></a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="{%url 'login'%}" style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Login</a></li>
+            <li><a href="{%url 'register'%}" style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Register</a></li>
+            <li><a href="{%url 'reports'%}" style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Reports</a></li>
+            <li><a href="{%url 'visuals'%}" style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Visuals</a></li>
+            <li><a href="{%url 'contacts'%}" style="color:black;font-family:monospace;font-weight:lighter;font-size:20px">Contacts</a></li>
+          </ul>
+        </div>
+      </nav>
+    <div class="regmaincard">
+        <form id="registerform" action=" " method="POST">
+            {%csrf_token%}
+            <h5>Register</h5>
+            <hr>
+            <table>
+            <tr>
+                <td><input type="text" placeholder="User ID" name="userid" required ></td>
+                <td><input type="text" placeholder="Username" name="username" required ></td>
+            </tr>
+            <tr>
+                <td><input type="password" placeholder="Password" name="password1" required ></td>  
+                <td><input type="password" placeholder="Confirm password" name="password2" required ></td>   
+            </tr>
+            <tr>
+                <td><input type = "email" placeholder = "Email" name="email" required ></td>
+                <td><input type = "text" placeholder = "Phone number" name="phonenumber" required ></td>  
+            </tr>
+            <tr>
+                <td><input type="date" name="dob" required ></td>
+                <td>
+                    <select class="browser-default" name="userstatechoices" style="background-color:transparent" required>
+                        <option selected>State of origin</option>
+                        <option value="1">Andhra Pradesh</option>
+                        <option value="2">Arunachal Pradesh</option>
+                        <option value="3">Assam</option>
+                        <option value="4">Bihar</option>
+                        <option value="5">Chhattisgarh</option>
+                        <option value="6">Goa</option>
+                        <option value="7">Gujarat</option>
+                        <option value="8">Haryana</option>
+                        <option value="9">Himachal Pradesh</option>
+                        <option value="10">Jharkhand</option>
+                        <option value="11">Karnataka</option>
+                        <option value="12">Kerala</option>
+                        <option value="13">Madhya Pradesh</option>
+                        <option value="14">Maharashtra</option>
+                        <option value="15">Manipur</option>
+                        <option value="16">Meghalaya</option>
+                        <option value="17">Mizoram</option>
+                        <option value="18">Nagaland</option>
+                        <option value="19">Odisha</option>
+                        <option value="20">Punjab</option>
+                        <option value="21">Rajasthan</option>
+                        <option value="22">Sikkim</option>
+                        <option value="23">Tamil Nadu</option>
+                        <option value="24">Telangana</option>
+                        <option value="25">Tripura</option>
+                        <option value="26">Uttarakhand</option>
+                        <option value="27">Uttar Pradesh</option>
+                        <option value="28">West Bengal</option>
+                    </select>
+
+                </td>
+            </tr>
+            </table>
+        </form>
+        <button class="submitbtn" onclick="submit()">Submit</button>
+        <script type="text/javascript">
+            function submit(){
+                document.getElementById('registerform').submit();
+            }
+        </script>
+    </div>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        
+        body{
+            background-color: #353935;
+        }
+
+        nav{
+            position: sticky;
+            background-color: #00ffa3;
+        }
+
+        .logo1{
+            position:relative;
+            height:65px;
+            width:70px;
+            left:0.5%;
+        }
+
+        .regmaincard{
+            align-items: center;
+            display:inline-block;
+            position:absolute;
+            top:21%;
+            left:28%;
+            height:500px;
+            width:600px;
+            background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+            border-radius:4px;
+        }
+
+        h5{
+            position:relative;
+            left:41%;
+            top:15px;
+            font-family:monospace;
+            color:#404040;
+        }
+        hr{
+            position:relative;
+            top:20px;
+            height:3px;
+            background-color:#8F8E8E;
+            border:none;
+        }
+        table{
+            max-width:500px;
+            position:relative;
+            top:50px;
+            left:10%;
+            border-spacing:10px;
+        }
+
+        tr,td{
+            border:none;
+        }
+        input{
+            color:black;
+            font-family:monospace;
+            font-weight: bolder;
+            height:35px;
+            width:180px;
+            padding-left:5%;
+            font-size:15px;
+            border:none;
+        }
+        
+        input:focus{
+            outline:none;
+            border:none;
+            border-bottom: black 2px;
+            box-shadow: none;
+        }
+
+        input:-webkit-autofill { 
+            -webkit-background-clip: text;
+            border:none;
+        }
+        ::placeholder{
+            color:#8F8E8E;
+        }
+    
+        select{
+            font-family:monospace;
+            font-size:15px;
+            height:35px;
+            width:232px;
+            border:none;
+        }
+        select:focus{
+            border:none;
+            outline:none;
+        }
+        
+        .submitbtn{
+            position:relative;
+            width:100%;
+            height:35px;
+            top:120px;
+            left:0px;
+            text-align:center;
+            transition:0.5s;
+        }
+
+        .submitbtn:hover{
+            background-color: #8F8E8E;
+            color:white;
+        }
+    </style>
+</body>
+
+</html>
+{%endblock%}
