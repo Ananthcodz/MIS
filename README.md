@@ -13,28 +13,38 @@ This project implements a full-stack web application with:
 ## Project Structure
 
 ```
-mir1/
+MIS/
 ├── manage.py              # Django management script
-├── mir1/                  # Project configuration package
+├── mirbase/               # Project configuration package
 │   ├── __init__.py        # PyMySQL configuration
 │   ├── settings.py        # Django settings (DB, installed apps, middleware)
 │   ├── urls.py            # URL routing configuration
 │   └── wsgi.py            # WSGI application definition
-├── mirbase/               # Main application package
+├── mir1/                  # Main application package
 │   ├── __init__.py
 │   ├── admin.py           # Django admin configuration
 │   ├── apps.py            # Application configuration
-│   ├── models.py          # Database models (to be implemented)
+│   ├── models.py          # Database models
+│   ├── forms.py           # Form handling of the page
+│   ├── tests.py           # Test cases
+│   └── views.py           # View controllers
+├── reports/               # Package specific for the reports and analysis production
+│   ├── __init__.py
+│   ├── admin.py           # Django admin configuration
+│   ├── apps.py            # Application configuration
+│   ├── models.py          # Database models
+│   ├── forms.py           # Form handling of the page
 │   ├── tests.py           # Test cases
 │   └── views.py           # View controllers
 └── templates/             # Frontend templates
-    ├── base1.html         # Base template with common structure
+    ├── base.html          # Base template with common structure
     ├── contacts.html      # Team contact information
     ├── home.html          # Dashboard with data visualization
     ├── login.html         # User authentication
     ├── register.html      # User registration
-    ├── register2.html     # Additional registration form
+    ├── visuals.html       # For visualizations
     └── reports.html       # Dynamic reports with filtering
+    
 ```
 
 ## Technical Implementation
